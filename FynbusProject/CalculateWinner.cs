@@ -22,7 +22,7 @@ namespace FynbusProject
 
         public void SortOffersInRoutesByPriceAscending()
         {
-            foreach(Route r in RoutesList)
+            foreach (Route r in RoutesList)
             {
                 r.SortListOfOffers();
             }
@@ -44,7 +44,7 @@ namespace FynbusProject
             List<Route> sortedRoutesList = RoutesList.OrderByDescending(r => r.GetDifference()).ToList();
             RoutesList = sortedRoutesList;
 
-            foreach(Route r in RoutesList)
+            foreach (Route r in RoutesList)
             {
                 Console.WriteLine(r.RouteNumber);
             }

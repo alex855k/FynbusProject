@@ -8,8 +8,6 @@ namespace FynbusProject
         public int RouteNumber { get; private set; }
         public int VehicleType { get; private set; }
 
-        public int AvailableHoursOnContractPeriod => AvaliableHours.GetAvaliableHours(RouteNumber);
-
         public List<Offer> ListOfOffers { get; private set; }
         public Route(int routeNb, int vehType)
         {

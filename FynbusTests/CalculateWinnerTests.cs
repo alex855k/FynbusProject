@@ -14,9 +14,9 @@ namespace FynbusTests
         {
             Contractor contractor = new Contractor("jan-1", "dasdad", "Thomas Hvidt", "sadad@gadas.com", 1, 2, 2, 3, 4);
             Route r = new Route(1, 1);
-            Offer o = new Offer("Jan-1", 10, 20, 250, contractor,10);
+            Offer o = new Offer("Jan-1", r, 250, contractor, 10);
             Contractor contractor2 = new Contractor("jan-1", "dasdad", "Thomas Hvidt", "sadad@gadas.com", 1, 2, 2, 1, 4);
-            Offer o2 = new Offer("Jan-1", 10, 20, 300, contractor, 10);
+            Offer o2 = new Offer("Jan-1", r, 300, contractor, 10);
             r.AddToList(o);
             r.AddToList(o2);
             Assert.AreEqual(r.GetDifference(), 50);
@@ -29,16 +29,16 @@ namespace FynbusTests
         {
             CalculateWinner calculateWinner = new CalculateWinner();
             Contractor contractor = new Contractor("jan-1", "Datguy", "Firstguy", "sadad@gadas.com", 1, 2, 2, 3, 4);
-            Route r = new Route(1,2);
-            Offer o = new Offer("Jan-1", 1, 20, 250, contractor, 10);
+            Route r = new Route(1, 2);
+            Offer o = new Offer("Jan-1", r, 250, contractor, 10);
             Contractor contractor2 = new Contractor("jan-1", "Datotherguy", "Otherguy", "otherguy@live.com", 1, 2, 2, 1, 4);
-            Offer o2 = new Offer("Jan-1", 1, 20, 300, contractor2, 10);
-            Offer o3 = new Offer("Jan-1", 1, 20, 30, contractor, 10);
+            Offer o2 = new Offer("Jan-1", r, 300, contractor2, 10);
+            Offer o3 = new Offer("Jan-1", r, 30, contractor, 10);
 
             r.AddToList(o);
             r.AddToList(o2);
             r.AddToList(o3);
-            
+
             // add to calculatewinner
             calculateWinner.AddToRouteList(r);
 
@@ -56,11 +56,11 @@ namespace FynbusTests
             CalculateWinner calculateWinner = new CalculateWinner();
             Contractor contractor = new Contractor("jan-1", "Datguy", "Firstguy", "sadad@gadas.com", 1, 2, 2, 3, 4);
             Route r = new Route(1, 2);
-            Offer o = new Offer("Jan-1", 10, 20, 250, contractor, 10);
+            Offer o = new Offer("Jan-1", r, 250, contractor, 10);
             Contractor contractor2 = new Contractor("jan-1", "Datotherguy", "Otherguy", "otherguy@live.com", 1, 2, 2, 1, 4);
-            Offer o2 = new Offer("Jan-1", 10, 20, 300, contractor2, 10);
-            Offer o3 = new Offer("Jan-1", 10, 20, 30, contractor, 10);
-            Offer o4 = new Offer("Jan-1", 10, 20, 270, contractor2, 10);
+            Offer o2 = new Offer("Jan-1", r, 300, contractor2, 10);
+            Offer o3 = new Offer("Jan-1", r, 30, contractor, 10);
+            Offer o4 = new Offer("Jan-1", r, 270, contractor2, 10);
             r.AddToList(o);
             r.AddToList(o2);
             Route r2 = new Route(2, 2);
@@ -89,10 +89,10 @@ namespace FynbusTests
 
             Route r = new Route(1, 2);
 
-            Offer o = new Offer("Jan-1", 10, 20, 250, contractor, 1);
-            Offer o2 = new Offer("Jan-2", 10, 20, 250, contractor2, 0);
-            Offer o3 = new Offer("Jan-3", 10, 20, 300, contractor, 3);
-            Offer o4 = new Offer("Jan-4", 10, 20, 300, contractor2, 0);
+            Offer o = new Offer("Jan-1", r, 250, contractor, 1);
+            Offer o2 = new Offer("Jan-2", r, 250, contractor2, 0);
+            Offer o3 = new Offer("Jan-3", r, 300, contractor, 3);
+            Offer o4 = new Offer("Jan-4", r, 300, contractor2, 0);
 
 
             r.AddToList(o);

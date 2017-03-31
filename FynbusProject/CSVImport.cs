@@ -170,7 +170,6 @@ namespace FynbusProject
 
                     string offerId = collumns[0];
                     int routeNumber = int.Parse(collumns[1]);
-                    int hoursAvailable = 10; // ??
                     double price = double.Parse(collumns[2]);
                     string contractorEmail = collumns[5];
                     Contractor contractor = ListOfContractors[contractorEmail];
@@ -180,9 +179,7 @@ namespace FynbusProject
                         priority = int.Parse(collumns[7]);
                     }
 
-
-
-                    Offer newOffer = new Offer(offerId, ListOfRoutes[routeNumber], hoursAvailable, price, contractor, priority);
+                    Offer newOffer = new Offer(offerId, ListOfRoutes[routeNumber], price, contractor, priority);
                     ListOfOffers.Add(newOffer);
                     ListOfRoutes[routeNumber].AddToList(newOffer);
                 }
