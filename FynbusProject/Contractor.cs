@@ -36,6 +36,28 @@
             return value;
         }
 
+        public void DecrementAmountOfVehicleOfType(int vehType)
+        {
+            switch (vehType)
+            {
+                case 2:
+                    TypeV2--;
+                    break;
+                case 3:
+                    TypeV3--;
+                    break;
+                case 5:
+                    TypeV5--;
+                    break;
+                case 6:
+                    TypeV6--;
+                    break;
+                case 7:
+                    TypeV7--;
+                    break;
+            }
+        }
+
 
         public Contractor(string number, string compName, string persName, string email, int t2, int t3, int t5, int t6, int t7)
         {

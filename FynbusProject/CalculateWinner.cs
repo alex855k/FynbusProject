@@ -14,11 +14,9 @@ namespace FynbusProject
 
             foreach (Route r in CSVImport.Instance.ListOfRoutes.Values)
             {
-                RoutesList.Add(r);
+                AddToRouteList(r);
             }
         }
-
-
 
         public void SortOffersInRoutesByPriceAscending()
         {
@@ -43,16 +41,51 @@ namespace FynbusProject
 
             List<Route> sortedRoutesList = RoutesList.OrderByDescending(r => r.GetDifference()).ToList();
             RoutesList = sortedRoutesList;
+        }
 
+        public void PrintWinners()
+        {
             foreach (Route r in RoutesList)
             {
-                Console.WriteLine(r.RouteNumber);
+                Console.WriteLine("Route #" + r.RouteNumber);
+                Console.WriteLine(
+                    "Contractor: " + r.WinningOffer.OfferContractor.CompanyName +
+                    "\n Contract value: " + r.WinningOffer.ContractValue);
             }
         }
 
-        public void GetWinners()
+        public bool SetWinners()
         {
-                
+            SortOffersInRoutesByPriceAscending();
+            SortRoutesByPriceDifference();
+            int routeIndex = 0;
+            bool hasFoundAllWinners = false;
+            while (!hasFoundAllWinners)
+            {
+                if (RoutesList[routeIndex].HasValidOffer(RoutesList[routeIndex].VehicleType))
+                {
+                    SetWinnerForRoute(RoutesList[routeIndex]);
+                }
+                else
+                {
+                    SortRoutesByPriceDifference();
+                    routeIndex = 0;
+                }
+                if (routeIndex == (RoutesList.Count() - 1))
+                {
+                    hasFoundAllWinners = true;
+                }
+                routeIndex++;
+            }
+            return true;
         }
+
+        private void SetWinnerForRoute(Route r)
+        {
+            r.WinningOffer.OfferContractor.DecrementAmountOfVehicleOfType(r.VehicleType);
+            r.WinningOffer = r.ListOfOffers[0];
+        }
+
+
     }
 }

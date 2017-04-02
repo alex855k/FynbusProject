@@ -9,9 +9,9 @@
         //Amount of hours that the flex vehicle is avaliable during a holiday
         public int AvaliabilityPeriodHolidays { get; set; }
 
-        private static int AmountOfHolidays = 14;
-        private static int AmountOfWeekDays = 261;
-        private static int AmountOfWeekendsDays = 100;
+        private static int AmountOfHolidays = 14 * 2;
+        private static int AmountOfWeekDays = 261 * 2;
+        private static int AmountOfWeekendsDays = 100 * 2;
 
         public int amountOfHoursContractPeriod()
         {

@@ -23,8 +23,8 @@ namespace FynbusProject
             Route route = CSVImport.Instance.ListOfRoutes[1];
 
             CalculateWinner cw = new CalculateWinner();
-            cw.SortOffersInRoutesByPriceAscending();
-            cw.SortRoutesByPriceDifference();
+            cw.SetWinners();
+            cw.PrintWinners();
             Console.ReadKey();
         }
     }
