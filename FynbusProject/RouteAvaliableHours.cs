@@ -9,12 +9,14 @@
         //Amount of hours that the flex vehicle is avaliable during a holiday
         public int AvaliabilityPeriodHolidays { get; set; }
 
-        private static int AmountOfHolidays = 14 * 2;
-        private static int AmountOfWeekDays = 261 * 2;
-        private static int AmountOfWeekendsDays = 100 * 2;
+        // Amount of days for 2-year period
+        private static int AmountOfHolidays = 14;
+        private static int AmountOfWeekDays = 261;
+        private static int AmountOfWeekendsDays = 100;
 
-        public int amountOfHoursContractPeriod()
+        public int AmountOfHoursContractPeriod()
         {
+            //Calculates the available hours needed for a specific route object
             return (AvaliabilityPeriodWeekDays * AmountOfWeekDays) +
                    (AvaliabilityPeriodHolidays * AmountOfHolidays) +
                    (AvaliabilityPeriodWeekends * AmountOfWeekendsDays);

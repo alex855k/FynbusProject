@@ -33,6 +33,7 @@
                     value = TypeV7;
                     break;
             }
+            // Returns amout of vehicles left from the Vehtype that was passed
             return value;
         }
 
@@ -70,6 +71,11 @@
             TypeV5 = t5;
             TypeV6 = t6;
             TypeV7 = t7;
+        }
+
+        public override string ToString()
+        {
+            return Number + " " + CompanyName + " " + PersonName + " " + EmailAddress + " " + TypeV2 + " " + TypeV3 + " " + TypeV5 + " " + TypeV6 + " " + TypeV7;
         }
     }
 }
