@@ -12,6 +12,30 @@
         public int TypeV6 { get; private set; }
         public int TypeV7 { get; private set; }
 
+        public int GetAmountOfVehicleOfType(int vehType)
+        {
+            int value = 0;
+            switch (vehType)
+            {
+                case 2:
+                    value = TypeV2;
+                    break;
+                case 3:
+                    value = TypeV3;
+                    break;
+                case 5:
+                    value = TypeV5;
+                    break;
+                case 6:
+                    value = TypeV6;
+                    break;
+                case 7:
+                    value = TypeV7;
+                    break;
+            }
+            return value;
+        }
+
 
         public Contractor(string number, string compName, string persName, string email, int t2, int t3, int t5, int t6, int t7)
         {

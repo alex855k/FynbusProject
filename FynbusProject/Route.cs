@@ -7,6 +7,8 @@ namespace FynbusProject
     {
         public int RouteNumber { get; private set; }
         public int VehicleType { get; private set; }
+        // Will store winning offer once it's been calculated
+        public Offer WinningOffer { get; set; }
 
         public List<Offer> ListOfOffers { get; private set; }
         public Route(int routeNb, int vehType)
@@ -14,6 +16,12 @@ namespace FynbusProject
             RouteNumber = routeNb;
             VehicleType = vehType;
             ListOfOffers = new List<Offer>();
+        }
+
+        public bool HasWinner()
+        {
+            // If the winning offer is null will return false
+            return WinningOffer != null;
         }
 
         public void AddToList(Offer o)
@@ -31,6 +39,18 @@ namespace FynbusProject
             double difference = 0;
             if (ListOfOffers.Count > 1)
             {
+
+                Offer first = null;
+                Offer second = null;
+
+                foreach (Offer o in ListOfOffers)
+                {
+                    if (o.HasVehicleOfVehType(VehicleType))
+                    {
+
+                    }
+                }
+
                 difference = ListOfOffers[1].Price - ListOfOffers[0].Price;
             }
 

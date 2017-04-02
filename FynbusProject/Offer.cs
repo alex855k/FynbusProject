@@ -25,5 +25,11 @@
             OfferContractor = cont;
             Priority = contPriority;
         }
+
+        public bool HasVehicleOfVehType(int vehicleType)
+        {
+            // If it has one or more of that vehicle return true
+            return 0 < this.OfferContractor.GetAmountOfVehicleOfType(vehicleType);
+        }
     }
 }

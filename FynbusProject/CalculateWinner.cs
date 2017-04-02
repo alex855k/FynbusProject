@@ -49,5 +49,10 @@ namespace FynbusProject
                 Console.WriteLine(r.RouteNumber);
             }
         }
+
+        public void GetWinners()
+        {
+                
+        }
     }
 }
