@@ -11,14 +11,12 @@ namespace FynbusProject
         public CalculateWinner()
         {
             RoutesList = new List<Route>();
-
+            // Adding route objects from the import class in the RoutesList
             foreach (Route r in CSVImport.Instance.ListOfRoutes.Values)
             {
                 RoutesList.Add(r);
             }
         }
-
-
 
         public void SortOffersInRoutesByPriceAscending()
         {
@@ -35,13 +33,14 @@ namespace FynbusProject
 
         public Route GetRouteInIndex(int index)
         {
+            //Getting a route object from an index in the list
             return RoutesList[index];
         }
 
         public void SortRoutesByPriceDifference()
         {
-
             List<Route> sortedRoutesList = RoutesList.OrderByDescending(r => r.GetDifference()).ToList();
+            //Updating the RoutesList with sorted values
             RoutesList = sortedRoutesList;
 
             foreach (Route r in RoutesList)

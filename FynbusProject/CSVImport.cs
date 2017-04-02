@@ -200,7 +200,7 @@ namespace FynbusProject
             ListOfOffers.Clear();
             ListOfContractors.Clear();
             ListOfRoutes.Clear();
-
+            // If the data in all the 3 lists is 0, it means that the lists are empty
             if (ListOfOffers.Count == 0 && ListOfContractors.Count == 0 && ListOfRoutes.Count == 0)
             {
                 dataCleared = true;

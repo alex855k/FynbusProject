@@ -61,8 +61,13 @@ namespace FynbusProject
         public override bool Equals(object obj)
         {
             Route r = (Route)obj;
+            // Returns true if both RouteNumber and VehicleType of the object we are passing and the this. route object are the same 
             return (r.RouteNumber == this.RouteNumber &&
                 r.VehicleType == this.VehicleType);
+        }
+        public override string ToString()
+        {
+            return RouteNumber + " " + VehicleType;
         }
     }
 }

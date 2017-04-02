@@ -29,6 +29,7 @@ namespace FynbusProject
 
         private static void InitializeData()
         {
+            //Inputting available hours for different routes
             routesAvaliableHours.Add(1, new RouteAvaliableHours()
             {
                 AvaliabilityPeriodWeekends = 0,
@@ -186,9 +187,10 @@ namespace FynbusProject
         }
 
 
-        public static int GetAvaliableHours(int routenumber)
+        public static int GetAvaliableHours(int routeNumber)
         {
-            return routesAvaliableHours[routenumber].amountOfHoursContractPeriod();
+            // Calculates the needed hours on that specific route object
+            return routesAvaliableHours[routeNumber].AmountOfHoursContractPeriod();
         }
     }
 }

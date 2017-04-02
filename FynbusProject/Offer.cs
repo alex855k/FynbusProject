@@ -12,6 +12,7 @@
         {
             get
             {
+                // Calculating the total contract value
                 return AvaliableHours.GetAvaliableHours(this.Route.RouteNumber) * Price;
             }
         }
@@ -30,6 +31,11 @@
         {
             // If it has one or more of that vehicle return true
             return 0 < this.OfferContractor.GetAmountOfVehicleOfType(vehicleType);
+        }
+
+        public override string ToString()
+        {
+            return Id + " " + Route + " " + Price + " " + OfferContractor + " " + Priority;
         }
     }
 }
