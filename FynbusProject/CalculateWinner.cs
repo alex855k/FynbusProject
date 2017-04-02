@@ -55,36 +55,60 @@ namespace FynbusProject
             }
         }
 
-        public bool SetWinners()
+        // Main method called for calculating winners
+        public List<Route> GetWinners()
         {
+            // Sorts the collection of offers on each route by price ascending
             SortOffersInRoutesByPriceAscending();
+            // sort routes by the price difference
             SortRoutesByPriceDifference();
+            // Loops over the list using this counter, resets if it finds a route with invalid offers
             int routeIndex = 0;
             bool hasFoundAllWinners = false;
             while (!hasFoundAllWinners)
             {
-                if (RoutesList[routeIndex].HasValidOffer(RoutesList[routeIndex].VehicleType))
+                Route currentRoute = RoutesList[routeIndex];
+                bool routeHasWinner = currentRoute.HasWinner();
+                Console.WriteLine("Current index : " + routeIndex);
+                if (!routeHasWinner)
                 {
-                    SetWinnerForRoute(RoutesList[routeIndex]);
-                }
-                else
-                {
-                    SortRoutesByPriceDifference();
-                    routeIndex = 0;
+                    try
+                    {
+                        if (currentRoute.HasValidOffer(currentRoute.VehicleType))
+                        {
+                            SetWinnerForRoute(currentRoute);
+                        }
+                        else
+                        {
+                            SortRoutesByPriceDifference();
+                            routeIndex = 0;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
                 }
                 if (routeIndex == (RoutesList.Count() - 1))
                 {
                     hasFoundAllWinners = true;
                 }
-                routeIndex++;
+                else
+                {
+                    routeIndex++;
+                }
             }
-            return true;
+            return RoutesList;
         }
 
         private void SetWinnerForRoute(Route r)
         {
-            r.WinningOffer.OfferContractor.DecrementAmountOfVehicleOfType(r.VehicleType);
-            r.WinningOffer = r.ListOfOffers[0];
+            if (r.ListOfOffers.Count > 0)
+            {
+                Console.Write("\n Found winner for route #" + r.RouteNumber + "\n");
+                r.SetWinningOffer();
+                r.WinningOffer.OfferContractor.DecrementAmountOfVehicleOfType(r.VehicleType);
+            }
         }
 
 

@@ -2,11 +2,11 @@
 {
     public class RouteAvaliableHours
     {
-        //Amount of hours that the flex vehicle is avaliable during a week day
+        //Amount of hours that the flex vehicle is avaliable during a normal week day
         public int AvaliabilityPeriodWeekDays { get; set; }
-        //Amount of hours that the flex vehicle is avaliable during a weekend day
+        //Amount of hours that the flex vehicle is avaliable during a day in the weekend 
         public int AvaliabilityPeriodWeekends { get; set; }
-        //Amount of hours that the flex vehicle is avaliable during a holiday
+        //Amount of hours that the flex vehicle is avaliable during a day that's a holiday
         public int AvaliabilityPeriodHolidays { get; set; }
 
         // Amount of days for 2-year period

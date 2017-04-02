@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FynbusProject
@@ -10,10 +11,11 @@ namespace FynbusProject
         // Will store winning offer once it's been calculated
         public Offer WinningOffer { get; set; }
 
-        private Offer firstOffer = null;
-        private Offer secondOffer = null;
+        private Offer _firstOffer = null;
+        private Offer _secondOffer = null;
 
         public List<Offer> ListOfOffers { get; private set; }
+
         public Route(int routeNb, int vehType)
         {
             RouteNumber = routeNb;
@@ -39,29 +41,50 @@ namespace FynbusProject
 
         public bool HasValidOffer(int vehType)
         {
+            bool hasValidOffer = false;
+            if (_firstOffer != null && _secondOffer != null)
+            {
+                hasValidOffer = _firstOffer.HasVehicleOfVehType(vehType) && _secondOffer.HasVehicleOfVehType(vehType);
+            }
+            if (_firstOffer == null && _secondOffer == null)
+            {
+                Console.WriteLine("Fuck u ");
+                //throw new Exception("Error: Route doesn't have any valid offers!");
+            }
+            if (_firstOffer != null && _secondOffer == null)
+            {
+                hasValidOffer = _firstOffer.HasVehicleOfVehType(vehType);
+            }
             // Returns true if both offers has vehicles left of the vehtype
-            return firstOffer.HasVehicleOfVehType(vehType) && secondOffer.HasVehicleOfVehType(vehType);
+            return hasValidOffer;
         }
 
         public void SetFirstAndSecondHighestValidOffer()
         {
-            if (ListOfOffers.Count > 1)
+            Console.WriteLine("Setting valid offers for" + RouteNumber);
+            if (!HasWinner())
             {
+                _firstOffer = null;
+                _secondOffer = null;
+
                 // Finds the first and second highest offers with vehicles left
 
                 foreach (Offer o in ListOfOffers)
                 {
                     if (o.HasVehicleOfVehType(VehicleType))
-                    {
-                        if (firstOffer == null)
+                    {   
+                        Console.WriteLine("Is true");
+                        if (_firstOffer == null)
                         {
-                            firstOffer = o;
+                            Console.WriteLine("Set first offer");
+                            _firstOffer = o;
                         }
                         else
                         {
-                            if (secondOffer == null)
+                            if (_secondOffer == null)
                             {
-                                secondOffer = o;
+                                Console.WriteLine("Set second offer");
+                                _secondOffer = o;
                             }
                         }
 
@@ -74,17 +97,16 @@ namespace FynbusProject
         {
             SetFirstAndSecondHighestValidOffer();
             double difference = 0;
-            if (firstOffer != null && secondOffer == null)
+            if (_firstOffer != null && _secondOffer != null)
             {
-                difference = firstOffer.Price - secondOffer.Price;
+                difference = _firstOffer.Price - _secondOffer.Price;
             }
             else
             {
-
+                difference = 0;
             }
             return difference;
         }
-
 
         public override bool Equals(object obj)
         {
@@ -96,6 +118,11 @@ namespace FynbusProject
         public override string ToString()
         {
             return RouteNumber + " " + VehicleType;
+        }
+
+        public void SetWinningOffer()
+        {
+            _firstOffer = WinningOffer;
         }
     }
 }

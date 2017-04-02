@@ -1,4 +1,6 @@
-﻿namespace FynbusProject
+﻿using System;
+
+namespace FynbusProject
 {
     public class Contractor
     {
@@ -19,9 +21,11 @@
             {
                 case 2:
                     value = TypeV2;
+                    Console.WriteLine("Amount of V2: " + TypeV2);
                     break;
                 case 3:
                     value = TypeV3;
+                    Console.WriteLine("Amount of V3: " + TypeV3);
                     break;
                 case 5:
                     value = TypeV5;
@@ -31,6 +35,9 @@
                     break;
                 case 7:
                     value = TypeV7;
+                    break;
+                default:
+                    value = 0;
                     break;
             }
             // Returns amout of vehicles left from the Vehtype that was passed
@@ -58,7 +65,6 @@
                     break;
             }
         }
-
 
         public Contractor(string number, string compName, string persName, string email, int t2, int t3, int t5, int t6, int t7)
         {

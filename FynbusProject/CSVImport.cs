@@ -13,7 +13,6 @@ namespace FynbusProject
 {
     public class CSVImport
     {
-
         public List<Offer> ListOfOffers
         { get; private set; }
         public Dictionary<string, Contractor> ListOfContractors { get; private set; }
@@ -70,12 +69,12 @@ namespace FynbusProject
 
 
             //Check if this is a header for the Route
-            if (data[0].Contains("Garanti-vogn nr.;Vogntype"))
+            if (data[0].Contains("Routenumber;Vogntype;"))
             {
                 isRouteData = true;
             }
 
-            if (isRouteData == true)
+            if (isRouteData)
             {
                 //Go through every row on the CSV file data after the headers (i=1)
                 for (int i = 1; i < data.Length; i++)
@@ -100,6 +99,26 @@ namespace FynbusProject
             return isRouteData;
         }
 
+        public void PrintRoutes()
+        {
+            foreach (KeyValuePair<int, Route> r in ListOfRoutes)
+            {
+                Console.WriteLine(r.Key + " " + r.Value.RouteNumber);
+
+            }
+
+        }
+
+        public void PrintContractors()
+        {
+            foreach (KeyValuePair<string, Contractor> r in ListOfContractors)
+            {
+                Console.WriteLine(r.Key + " " + r.Value.PersonName);
+
+            }
+
+        }
+
         private bool ImportContractor(string filepath)
         {
             bool isContractorData = false;
@@ -108,12 +127,12 @@ namespace FynbusProject
             string[] data = File.ReadAllLines(filepath, Encoding.GetEncoding("iso-8859-1"));
 
             //Check if this is a header for the Contractor
-            if (data[0].Contains("Nummer;Navn;Virksomhedsnavn;BrugerID;Vedståelse v2;Vedståelse v3;Vedståelse v5;Vedståelse v6;Vedståelse v7;"))
-            {
-                isContractorData = true;
-            }
+            //if (data[0].Contains("Nummer;Navn;Virksomhedsnavn;BrugerID;Vedståelse v2;Vedståelse v3;Vedståelse v5;Vedståelse v6;Vedståelse v7;"))
 
-            if (isContractorData == true)
+            isContractorData = true;
+
+
+            if (isContractorData)
             {
                 //Go through every row on the CSV file data after the headers (i=1)
                 for (int i = 1; i < data.Length; i++)
@@ -181,7 +200,7 @@ namespace FynbusProject
 
                     Offer newOffer = new Offer(offerId, ListOfRoutes[routeNumber], price, contractor, priority);
                     ListOfOffers.Add(newOffer);
-                    ListOfRoutes[routeNumber].AddToList(newOffer);
+                    ListOfRoutes[1].AddToList(newOffer);
                 }
             }
 
