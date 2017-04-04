@@ -134,15 +134,5 @@ namespace FynbusTests
             CalculateWinner calculateWinner = new CalculateWinner();
         }
 
-
-        [TestMethod]
-        public void CanGetAvaliableHoursForRoute()
-        {
-            Assert.AreEqual();
-            new AvaliableHours().;
-          
-        }
-
-
     }
 }

@@ -11,6 +11,7 @@ namespace FynbusProject
 
         private void Run()
         {
+
             string filepathRoutes = @"C:\Users\AlexanderHvidt\Desktop\RouteNumbers.csv";
             string filepathOffers = @"C:\Users\AlexanderHvidt\Desktop\Tilbud_FakeData.csv";
             string filepathContractors = @"C:\Users\AlexanderHvidt\Desktop\Stamoplysninger_FakeData.csv";
@@ -28,6 +29,9 @@ namespace FynbusProject
             cw.GetWinners();
             Console.WriteLine("Finished");
             Console.ReadKey();
+
+
+
             //cw.PrintWinners();
         }
     }
