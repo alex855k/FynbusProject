@@ -27,7 +27,7 @@ namespace FynbusProject
            InitializeData();
         }
 
-        private static void InitializeData()
+        private void InitializeData()
         {
             //Inputting available hours for different routes
             routesAvaliableHours.Add(1, new RouteAvaliableHours()

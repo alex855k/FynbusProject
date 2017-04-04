@@ -138,11 +138,22 @@ namespace FynbusTests
         [TestMethod]
         public void CanGetAvaliableHoursForRoute()
         {
-            AvaliableHours av = AvaliableHours.Instance;
+           AvaliableHours av = AvaliableHours.Instance;
             RouteAvaliableHours routeAvHour = new RouteAvaliableHours();
+
 
             Assert.AreEqual(4698, AvaliableHours.GetAvaliableHours(1));
             Assert.AreEqual(7742, AvaliableHours.GetAvaliableHours(2));
+        }
+
+        [TestMethod]
+        public void CanGetTotalContractValue()
+        {
+            Contractor contractor = new Contractor("jan-1", "dasdad", "Thomas Hvidt", "sadad@gadas.com", 1, 2, 2, 3, 4);
+            Route r = new Route(1, 1);
+            Offer o = new Offer("Jan-1", r, 250, contractor, 10);
+            AvaliableHours av = AvaliableHours.Instance;
+            Assert.AreEqual(4698*o.Price, o.ContractValue);
         }
 
 

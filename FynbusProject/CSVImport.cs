@@ -41,7 +41,7 @@ namespace FynbusProject
 
         public bool Import(string filepath, fileType ft)
         {
-            bool importSucessful = false; ;
+            bool importSucessful = false;
 
 
             switch (ft)
