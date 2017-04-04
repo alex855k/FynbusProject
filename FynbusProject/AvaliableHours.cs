@@ -20,11 +20,11 @@ namespace FynbusProject
             }
         }
 
-        private static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>() { }
+        public static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>();
 
         private AvaliableHours()
         {
-            InitializeData();
+           InitializeData();
         }
 
         private static void InitializeData()

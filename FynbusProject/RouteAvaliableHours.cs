@@ -14,6 +14,7 @@
         private static int AmountOfWeekDays = 261 * 2;
         private static int AmountOfWeekendsDays = 100 * 2;
 
+        
         public int AmountOfHoursContractPeriod()
         {
             //Calculates the available hours needed for a specific route object
