@@ -12,7 +12,7 @@
         {
             get
             {
-                return AvaliableHours.GetAvaliableHours(this.Route.RouteNumber) * Price;
+                return AvaliableHours.Instance.GetAvaliableHours(this.Route.RouteNumber) * Price;
             }
         }
 

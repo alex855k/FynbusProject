@@ -187,7 +187,7 @@ namespace FynbusProject
         }
 
 
-        public static int GetAvaliableHours(int routeNumber)
+        public int GetAvaliableHours(int routeNumber)
         {
             // Calculates the needed hours on that specific route object
             return routesAvaliableHours[routeNumber].AmountOfHoursContractPeriod();

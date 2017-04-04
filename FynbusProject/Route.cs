@@ -122,7 +122,7 @@ namespace FynbusProject
 
         public void SetWinningOffer()
         {
-            _firstOffer = WinningOffer;
+            WinningOffer = _firstOffer;
         }
     }
 }

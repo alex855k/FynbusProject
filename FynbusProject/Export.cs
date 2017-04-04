@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 using System;
+using System.Text;
 
 namespace FynbusProject
 {
@@ -20,40 +21,33 @@ namespace FynbusProject
             numberOfRows = numRows;
         }
 
-        private string getPlaceToSave()
-        {
-            string placeToSave = "WinnerList.pdf";
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-            saveFileDialog.DefaultExt = ".pdf";
-            if (saveFileDialog.ShowDialog() == true)
-                placeToSave = saveFileDialog.FileName;
-            else
-                throw new Exception("Export canceled!");
+        
 
-            return placeToSave;
-        }
-
-        public void ExportToPDF()
+        public void ExportToPDF(string path)
         {
             listOfWinners = cw.GetWinners();
-            string placeToSave = "";
 
-            
-                placeToSave = getPlaceToSave();
-
-                FileStream fs = new FileStream(placeToSave, FileMode.Create);
+            try
+            {
+                FileStream fs = new FileStream(path, FileMode.Create);
                 Document document = new Document(PageSize.A4, 25, 25, 30, 30);
-                // Create an instance to the PDF file by creating an instance of the PDF 
-                // Writer class using the document and the filestrem in the constructor.
+
                 PdfWriter writer = PdfWriter.GetInstance(document, fs);
                 PdfPTable table = new PdfPTable(numberOfRows);
                 PreparePdfTable(table);
 
                 document.Open();
                 document.Add(table);
-               
-            
-          
+                document.Close();
+                writer.Close();
+                fs.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Something went wrong saving the file");
+            }
+
+
         }
 
         private void PreparePdfTable(PdfPTable table)
@@ -65,19 +59,58 @@ namespace FynbusProject
 
             foreach (Route r in listOfWinners)
             {
-                table.AddCell(r.RouteNumber.ToString());
-                table.AddCell(r.WinningOffer.OfferContractor.CompanyName);
-                table.AddCell(r.WinningOffer.OfferContractor.PersonName);
-                table.AddCell(r.WinningOffer.ContractValue.ToString());
+                if (r.WinningOffer != null)
+                {
+                    table.AddCell(r.RouteNumber.ToString());
+                    table.AddCell(r.WinningOffer.OfferContractor.CompanyName);
+                    table.AddCell(r.WinningOffer.OfferContractor.PersonName);
+                    table.AddCell(r.WinningOffer.ContractValue.ToString());
+                }
             }
         }
 
-        public void ExportToCSV()
+        public void ExportToCSV(string path)
         {
             listOfWinners = cw.GetWinners();
 
+            StringBuilder csvContent = PrepareCsvContent();
+
+            
+            try
+            {
+
+                File.WriteAllText(path, csvContent.ToString());
+            }
+            catch
+            {
+                throw new Exception("Something went wrong creating the file!");
+            }
+
         }
 
+        private StringBuilder PrepareCsvContent()
+        {
+            StringBuilder csvContent = new StringBuilder();
+
+            csvContent.AppendLine("Route number,Company name,Contact person,Contract value");
+            
+            foreach(Route r in listOfWinners)
+            {
+                if(r.WinningOffer != null)
+                {
+                    string routeNr = r.RouteNumber.ToString();
+                    string compName = r.WinningOffer.OfferContractor.CompanyName;
+                    string personName = r.WinningOffer.OfferContractor.PersonName;
+                    string contractValue = r.WinningOffer.ContractValue.ToString();
+
+                    string newLine = string.Format("{0},{1},{2},{3}", routeNr, compName, personName, contractValue);
+
+                    csvContent.AppendLine(newLine);
+                }
+            }
+
+            return csvContent;
+        }
 
 
     }
