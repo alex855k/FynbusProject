@@ -69,7 +69,7 @@ namespace FynbusProject
 
 
             //Check if this is a header for the Route
-            if (data[0].Contains("Routenumber;Vogntype;"))
+            if (data[0].Contains("Routenumber;Vogntype"))
             {
                 isRouteData = true;
             }

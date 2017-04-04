@@ -26,13 +26,13 @@
             </ListView.View>
         </ListView>
         <Button x:Name="button_Import" Content="Import" HorizontalAlignment="Left" Margin="583,206,0,0" VerticalAlignment="Top" Width="75" Height="18" Grid.RowSpan="2" Click="button_Import_Click"/>
-        <Button x:Name="button_ExportPdf" Content="PDF" HorizontalAlignment="Left" Margin="504,221,0,0" VerticalAlignment="Top" Width="64" Height="22" Grid.Row="1"/>
-        <Button x:Name="button_CalculateWinners" Content="Calculate the winners" HorizontalAlignment="Left" Margin="526,181,0,0" VerticalAlignment="Top" Width="121" Height="22" Grid.Row="1"/>
+        <Button x:Name="button_ExportPdf" IsEnabled="False" Content="PDF" HorizontalAlignment="Left" Margin="504,221,0,0" VerticalAlignment="Top" Width="64" Height="22" Grid.Row="1" Click="button_ExportPdf_Click"/>
+        <Button x:Name="button_CalculateWinners" IsEnabled="False" Content="Calculate the winners" HorizontalAlignment="Left" Margin="526,181,0,0" VerticalAlignment="Top" Width="121" Height="22" Grid.Row="1"/>
         <Label x:Name="label_Routes" Content="Routes:" HorizontalAlignment="Left" Margin="49,139,0,0" VerticalAlignment="Top" Height="27"/>
         <TextBox x:Name="textBox_Routes" HorizontalAlignment="Left" Height="18" Margin="49,165,0,0" TextWrapping="Wrap" Text="C:\" VerticalAlignment="Top" Width="529"/>
         <Button x:Name="button_ChooseRoutes" Content="Choose.." HorizontalAlignment="Left" Margin="583,165,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.397,2.771" Click="button_ChooseRoutes_Click"/>
         <Label x:Name="label_ExportTo" Content="Export to:" HorizontalAlignment="Left" Margin="438,221,0,0" VerticalAlignment="Top" Height="27" Grid.Row="1"/>
-        <Button x:Name="button_ExportCsv" Content="Excel" HorizontalAlignment="Left" Margin="583,221,0,0" VerticalAlignment="Top" Width="64" Height="22" Grid.Row="1"/>
-        <Button x:Name="button_Clear" Content="Clear" HorizontalAlignment="Left" Margin="33,221.4,0,0" VerticalAlignment="Top" Width="64" Height="22" Click="button_Clear_Click" Grid.Row="1"/>
+        <Button x:Name="button_ExportCsv" IsEnabled="False" Content="Excel" HorizontalAlignment="Left" Margin="583,221,0,0" VerticalAlignment="Top" Width="64" Height="22" Grid.Row="1" Click="button_ExportCsv_Click"/>
+        <Button x:Name="button_Clear" IsEnabled="False" Content="Clear" HorizontalAlignment="Left" Margin="33,221.4,0,0" VerticalAlignment="Top" Width="64" Height="22" Click="button_Clear_Click" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using FynbusProject;
+using Microsoft.Win32;
 using System;
 
 namespace GUI
@@ -12,22 +13,15 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-
-            button_ExportCsv.IsEnabled = false;
-            button_ExportPdf.IsEnabled = false;
-            button_CalculateWinners.IsEnabled = false;
-            button_Clear.IsEnabled = false;
-            button_Import.IsEnabled = false;
         }
 
         private void button_Clear_Click(object sender, RoutedEventArgs e)
         {
+
             textBox_BasicData.Text = string.Empty;
             textBox_OfferData.Text = string.Empty;
             textBox_Routes.Text = string.Empty;
-            button_Clear.IsEnabled = false;
-            button_CalculateWinners.IsEnabled = false;
-            button_Import.IsEnabled = false;
+            DisableButtonsAfterClear();
             bool dataCleared = CSVImport.Instance.ClearData();
 
             if (dataCleared)
@@ -42,88 +36,108 @@ namespace GUI
 
         private void button_ChooseContractorData_Click(object sender, RoutedEventArgs e)
         {
-            // Create OpenFileDialog 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            // Set filter for file extension and default file extension
-            dlg.DefaultExt = ".csv";
-            dlg.Filter = "CSV file (.csv)|*.csv";
-
-            // Display OpenFileDialog by calling ShowDialog method
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox
-            if (result == true)
-            {
-                // Open document
-                string filePathContractor = dlg.FileName;
-                textBox_BasicData.Text = filePathContractor;
-            }
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.CheckFileExists = true;
+            ofd.Multiselect = false;
+            ofd.AddExtension = true;
+            ofd.ShowDialog();
+            textBox_BasicData.Text = ofd.FileName;
         }
 
         private void button_ChooseOfferData_Click(object sender, RoutedEventArgs e)
         {
-            // Create OpenFileDialog 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            // Set filter for file extension and default file extension
-            dlg.DefaultExt = ".csv";
-            dlg.Filter = "CSV file (.csv)|*.csv";
-
-            // Display OpenFileDialog by calling ShowDialog method
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox
-            if (result == true)
-            {
-                // Open document
-                string filePathOffer = dlg.FileName;
-                textBox_OfferData.Text = filePathOffer;
-            }
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.CheckFileExists = true;
+            ofd.Multiselect = false;
+            ofd.AddExtension = true;
+            ofd.ShowDialog();
+            textBox_OfferData.Text = ofd.FileName;
         }
 
         private void button_ChooseRoutes_Click(object sender, RoutedEventArgs e)
         {
-            // Create OpenFileDialog 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            // Set filter for file extension and default file extension
-            dlg.DefaultExt = ".csv";
-            dlg.Filter = "CSV file (.csv)|*.csv";
-
-            // Display OpenFileDialog by calling ShowDialog method
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Get the selected file name and display in a TextBox
-            if (result == true)
-            {
-                // Open document
-                string filePathRoute = dlg.FileName;
-                textBox_Routes.Text = filePathRoute;
-                button_Import.IsEnabled = true;
-
-            }
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.CheckFileExists = true;
+            ofd.Multiselect = false;
+            ofd.AddExtension = true;
+            ofd.ShowDialog();
+            textBox_Routes.Text = ofd.FileName;
         }
 
         private void button_Import_Click(object sender, RoutedEventArgs e)
         {
-            string filePathRoute = textBox_Routes.Text;
-            bool importSucessfullyRoutes = CSVImport.Instance.Import(filePathRoute, fileType.ROUTES);
-
-            string filePathContractor = textBox_BasicData.Text;
-            bool importSucessfullyContractors = CSVImport.Instance.Import(filePathContractor, fileType.CONTRACTORS);
-
-            string filePathOffer = textBox_OfferData.Text;
-            bool importSucessfullyOffers = CSVImport.Instance.Import(filePathOffer, fileType.OFFERS);
-
-            if (importSucessfullyContractors == true && importSucessfullyOffers == true && importSucessfullyRoutes == true)
+            try
             {
-                MessageBox.Show("Data is imported sucessfuly!");
-                button_CalculateWinners.IsEnabled = true;
-                button_Clear.IsEnabled = true;
+                CSVImport.Instance.Import(textBox_Routes.Text, fileType.ROUTES);
+                CSVImport.Instance.Import(textBox_BasicData.Text, fileType.CONTRACTORS);
+                CSVImport.Instance.Import(textBox_OfferData.Text, fileType.OFFERS);
+                EnableButtonsAfterImport();
+                MessageBox.Show("Data imported sucessfuly!");
             }
+            catch
+            {
+                MessageBox.Show("Something went wrong with the import, please verify the files and try again!");
+            }
+        }
+
+        private void EnableButtonsAfterImport()
+        {
+            button_CalculateWinners.IsEnabled = true;
+            button_Clear.IsEnabled = true;
+            button_ExportCsv.IsEnabled = true;
+            button_ExportPdf.IsEnabled = true;
+        }
+
+        private void DisableButtonsAfterClear()
+        {
+            button_CalculateWinners.IsEnabled = false;
+            button_Clear.IsEnabled = false;
+            button_ExportCsv.IsEnabled = false;
+            button_ExportPdf.IsEnabled = false;
+        }
+        private void button_ExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+            CalculateWinner cw = new CalculateWinner();
+            cw.GetWinners();
+
+            Export exp = new Export(cw, 4);
+            try
+            {
+                exp.ExportToPDF(GetPlaceToSave(".pdf"));
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message);
+            }
+        }
+
+        private void button_ExportCsv_Click(object sender, RoutedEventArgs e)
+        {
+            CalculateWinner cw = new CalculateWinner();
+            cw.GetWinners();
+
+            Export exp = new Export(cw, 4);
+            try
+            {
+                exp.ExportToCSV(GetPlaceToSave(".csv"));
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message);
+            }
+        }
+
+        private string GetPlaceToSave(string extension)
+        {
+            string placeToSave = null;
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+            saveFileDialog.DefaultExt = extension;
+            if (saveFileDialog.ShowDialog() == true)
+                placeToSave = saveFileDialog.FileName;
             else
-            {
-                MessageBox.Show("Oops! Something went wrong importing, please try again");
-            }
+                throw new Exception("User canceled save");
 
+            return placeToSave;
         }
     }
 }

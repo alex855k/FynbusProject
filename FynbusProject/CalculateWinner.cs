@@ -48,10 +48,13 @@ namespace FynbusProject
         {
             foreach (Route r in RoutesList)
             {
-                Console.WriteLine("Route #" + r.RouteNumber);
-                Console.WriteLine(
-                    "Contractor: " + r.WinningOffer.OfferContractor.CompanyName +
-                    "\n Contract value: " + r.WinningOffer.ContractValue);
+                if (r.WinningOffer != null)
+                {
+                    Console.WriteLine("Route #" + r.RouteNumber);
+                    Console.WriteLine(
+                        "Contractor: " + r.WinningOffer.OfferContractor.CompanyName +
+                        "\n Contract value: " + r.WinningOffer.ContractValue);
+                }
             }
         }
 
@@ -107,7 +110,7 @@ namespace FynbusProject
             {
                 Console.Write("\n Found winner for route #" + r.RouteNumber + "\n");
                 r.SetWinningOffer();
-                r.WinningOffer.OfferContractor.DecrementAmountOfVehicleOfType(r.VehicleType);
+                 r.WinningOffer.OfferContractor.DecrementAmountOfVehicleOfType(r.VehicleType);
             }
         }
 
