@@ -5,29 +5,29 @@ namespace FynbusProject
     public class AvaliableHours
     {
 
-        private static AvaliableHours instance = null;
+        private static AvaliableHours _instance = null;
 
         public static AvaliableHours Instance
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                 {
-                    instance = new AvaliableHours();
+                    _instance = new AvaliableHours();
                 }
-                return instance;
+                return _instance;
 
             }
         }
 
-        private static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>();
+        public static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>();
 
         private AvaliableHours()
         {
-            InitializeData();
+           InitializeData();
         }
 
-        private static void InitializeData()
+        private void InitializeData()
         {
             //Inputting available hours for different routes
             routesAvaliableHours.Add(1, new RouteAvaliableHours()

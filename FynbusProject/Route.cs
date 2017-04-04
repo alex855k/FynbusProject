@@ -72,7 +72,8 @@ namespace FynbusProject
                 foreach (Offer o in ListOfOffers)
                 {
                     if (o.HasVehicleOfVehType(VehicleType))
-                    {   
+                    {
+                        Console.WriteLine("Is true");
                         if (_firstOffer == null)
                         {
                             Console.WriteLine("Set first offer");
@@ -121,8 +122,7 @@ namespace FynbusProject
 
         public void SetWinningOffer()
         {
-            WinningOffer = _firstOffer;
-            //_firstOffer = WinningOffer;
+            _firstOffer = WinningOffer;
         }
     }
 }

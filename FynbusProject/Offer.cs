@@ -8,7 +8,13 @@
         public Contractor OfferContractor { get; private set; }
         public int Priority { get; private set; }
 
-        public double ContractValue => AvaliableHours.GetAvaliableHours(this.Route.RouteNumber) * Price;
+        public double ContractValue
+        {
+            get
+            {
+                return AvaliableHours.GetAvaliableHours(this.Route.RouteNumber) * Price;
+            }
+        }
 
 
         public Offer(string id, Route routeNumber, double price, Contractor cont, int contPriority)

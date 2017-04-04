@@ -72,7 +72,7 @@ namespace FynbusProject
             }
         }
 
-        public void ExportToCVS()
+        public void ExportToCSV()
         {
             listOfWinners = cw.GetWinners();
 
