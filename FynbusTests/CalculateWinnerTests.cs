@@ -7,6 +7,17 @@ namespace FynbusTests
     public class CalculateWinnerTests
     {
 
+        private CalculateWinner cw;
+        private Route testRoute;
+
+
+        [TestInitialize]
+        public void Initialize()
+        {
+
+
+
+        }
         //Unit Tests
 
         [TestMethod]
@@ -94,7 +105,6 @@ namespace FynbusTests
             Offer o3 = new Offer("Jan-3", r, 300, contractor, 3);
             Offer o4 = new Offer("Jan-4", r, 300, contractor2, 0);
 
-
             r.AddToList(o);
             r.AddToList(o2);
             r.AddToList(o3);
@@ -122,6 +132,15 @@ namespace FynbusTests
         public void CanCalculateWinner()
         {
             CalculateWinner calculateWinner = new CalculateWinner();
+        }
+
+
+        [TestMethod]
+        public void CanGetAvaliableHoursForRoute()
+        {
+            Assert.AreEqual();
+            new AvaliableHours().;
+          
         }
 
 

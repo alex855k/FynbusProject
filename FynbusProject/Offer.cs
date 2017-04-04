@@ -11,10 +11,10 @@
         public double ContractValue => AvaliableHours.GetAvaliableHours(this.Route.RouteNumber) * Price;
 
 
-        public Offer(string id, Route routeNumber, double price, Contractor cont, int contPriority)
+        public Offer(string id, Route route, double price, Contractor cont, int contPriority)
         {
             Id = id;
-            Route = routeNumber;
+            Route = route;
             Price = price;
             OfferContractor = cont;
             Priority = contPriority;

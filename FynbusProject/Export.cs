@@ -13,7 +13,7 @@
 
         }
 
-        public void ExportToCVS()
+        public void ExportToCSV()
         {
 
         }

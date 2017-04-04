@@ -5,22 +5,22 @@ namespace FynbusProject
     public class AvaliableHours
     {
 
-        private static AvaliableHours instance = null;
+        private static AvaliableHours _instance = null;
 
         public static AvaliableHours Instance
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                 {
-                    instance = new AvaliableHours();
+                    _instance = new AvaliableHours();
                 }
-                return instance;
+                return _instance;
 
             }
         }
 
-        private static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>();
+        private static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>() { }
 
         private AvaliableHours()
         {
