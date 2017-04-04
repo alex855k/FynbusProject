@@ -20,15 +20,14 @@ namespace FynbusProject
             }
         }
 
-        private static Dictionary<int, RouteAvaliableHours> routesAvaliableHours =
-            new Dictionary<int, RouteAvaliableHours>();
+        public static Dictionary<int, RouteAvaliableHours> routesAvaliableHours = new Dictionary<int, RouteAvaliableHours>();
 
         private AvaliableHours()
         {
-            InitializeData();
+           InitializeData();
         }
 
-        private static void InitializeData()
+        private void InitializeData()
         {
             //Inputting available hours for different routes
             routesAvaliableHours.Add(1, new RouteAvaliableHours()
@@ -190,7 +189,6 @@ namespace FynbusProject
 
         public static int GetAvaliableHours(int routeNumber)
         {
-
             // Calculates the needed hours on that specific route object
             return routesAvaliableHours[routeNumber].AmountOfHoursContractPeriod();
         }
