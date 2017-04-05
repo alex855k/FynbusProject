@@ -10,11 +10,11 @@ namespace WpfApplication1.ViewModels
 {
     public class ViewModelWinnersList
     {
-        CalculateWinner cw = new CalculateWinner();
+         CalculateWinner cw = new CalculateWinner();
         List<WinningOfferModel> listOfWinningOffers = new List<WinningOfferModel>();
 
-        
-        List<WinningOfferModel> WinningRoute
+
+        public List<WinningOfferModel> WinningRoute
         {
             get
             {

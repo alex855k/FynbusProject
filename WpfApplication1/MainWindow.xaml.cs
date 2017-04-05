@@ -3,6 +3,7 @@ using FynbusProject;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using WpfApplication1.ViewModels;
 
 namespace GUI
 {
@@ -144,7 +145,8 @@ namespace GUI
 
         private void button_CalculateWinners_Click(object sender, RoutedEventArgs e)
         {
-            lstViewWinners.DataContext = cw. ;
+            ViewModelWinnersList vm = new ViewModelWinnersList();
+            lstViewWinners.DataContext = vm.WinningRoute;
         }
     }
 }

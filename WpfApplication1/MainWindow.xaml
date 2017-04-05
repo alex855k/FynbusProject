@@ -21,7 +21,7 @@
         <ListBox x:Name="lstViewWinners" HorizontalAlignment="Left" Height="164" Margin="49,0.4,0,0" VerticalAlignment="Top" Width="609" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding }"/>
+                    <TextBox Text="{Binding Path= WinningRoute }"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApplication1.Models
 {
-    class WinningOfferModel
+    public class WinningOfferModel
     {
         public WinningOfferModel(int routeNumber, string companyName, double totalContractValue)
         {
