@@ -10,6 +10,14 @@ namespace FynbusProject
         public int VehicleType { get; private set; }
         // Will store winning offer once it's been calculated
         public Offer WinningOffer { get; set; }
+        
+        public string CompanyName
+        {
+            get
+            {
+                return ListOfOffers[0].OfferContractor.CompanyName;
+            }
+        }
 
         private Offer _firstOffer = null;
         private Offer _secondOffer = null;

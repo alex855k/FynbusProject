@@ -2,6 +2,7 @@
 using FynbusProject;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 
 namespace GUI
 {
@@ -10,6 +11,7 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CalculateWinner cw = new CalculateWinner();
         public MainWindow()
         {
             InitializeComponent();
@@ -138,6 +140,11 @@ namespace GUI
                 throw new Exception("User canceled save");
 
             return placeToSave;
+        }
+
+        private void button_CalculateWinners_Click(object sender, RoutedEventArgs e)
+        {
+            lstViewWinners.DataContext = cw. ;
         }
     }
 }

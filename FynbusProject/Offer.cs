@@ -4,6 +4,7 @@
     {
         public string Id { get; private set; }
         public Route Route { get; private set; }
+        
         public double Price { get; private set; }
         public Contractor OfferContractor { get; private set; }
         public int Priority { get; private set; }
